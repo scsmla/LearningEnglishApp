@@ -36,22 +36,34 @@
           </Group>
           <Group type="102" alignment="0" attributes="0">
               <EmptySpace min="-2" pref="51" max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="1" attributes="0">
-                  <Component id="manage" min="-2" max="-2" attributes="0"/>
-                  <Component id="jButton1" min="-2" pref="99" max="-2" attributes="0"/>
-              </Group>
-              <EmptySpace min="-2" pref="47" max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                  <Component id="goalButton" pref="110" max="32767" attributes="0"/>
-                  <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                      <Component id="review" pref="110" max="32767" attributes="0"/>
-                      <Component id="test" pref="110" max="32767" attributes="0"/>
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Group type="103" alignment="0" groupAlignment="1" attributes="0">
+                      <Component id="createButton" min="-2" pref="99" max="-2" attributes="0"/>
+                      <Component id="goalButton" min="-2" pref="101" max="-2" attributes="0"/>
+                  </Group>
+                  <Group type="102" alignment="0" attributes="0">
+                      <EmptySpace min="-2" pref="2" max="-2" attributes="0"/>
+                      <Component id="manageWordButton" min="-2" max="-2" attributes="0"/>
                   </Group>
               </Group>
-              <EmptySpace pref="47" max="32767" attributes="0"/>
+              <EmptySpace pref="34" max="32767" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="button3" min="-2" pref="102" max="-2" attributes="0"/>
-                  <Component id="statistic" min="-2" pref="102" max="-2" attributes="0"/>
+                  <Group type="102" alignment="1" attributes="0">
+                      <Component id="reviewButton" min="-2" pref="110" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="43" max="-2" attributes="0"/>
+                  </Group>
+                  <Group type="102" attributes="0">
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Component id="learnButton" min="-2" pref="110" max="-2" attributes="0"/>
+                          <Component id="testButton" min="-2" pref="110" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace max="-2" attributes="0"/>
+                  </Group>
+              </Group>
+              <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                  <Component id="manageDIcButton" pref="102" max="32767" attributes="0"/>
+                  <Component id="statisticButton" pref="102" max="32767" attributes="0"/>
+                  <Component id="notifyButton" alignment="0" max="32767" attributes="0"/>
               </Group>
               <EmptySpace min="-2" pref="31" max="-2" attributes="0"/>
           </Group>
@@ -60,62 +72,73 @@
     <DimensionLayout dim="1">
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="0" attributes="0">
-              <EmptySpace max="-2" attributes="0"/>
+              <EmptySpace min="-2" max="-2" attributes="0"/>
               <Component id="label1" min="-2" pref="44" max="-2" attributes="0"/>
               <EmptySpace min="-2" pref="45" max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                  <Component id="jButton1" alignment="0" max="32767" attributes="0"/>
-                  <Component id="button3" alignment="1" max="32767" attributes="0"/>
-                  <Component id="review" alignment="1" max="32767" attributes="0"/>
+              <Group type="103" groupAlignment="1" attributes="0">
+                  <Group type="102" attributes="0">
+                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                          <Component id="createButton" alignment="0" max="32767" attributes="0"/>
+                          <Component id="manageDIcButton" alignment="1" max="32767" attributes="0"/>
+                          <Component id="reviewButton" alignment="1" max="32767" attributes="0"/>
+                      </Group>
+                      <EmptySpace min="-2" pref="65" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="1" attributes="0">
+                          <Component id="testButton" min="-2" max="-2" attributes="0"/>
+                          <Component id="manageWordButton" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                  </Group>
+                  <Component id="statisticButton" min="-2" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace pref="45" max="32767" attributes="0"/>
-              <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="test" min="-2" max="-2" attributes="0"/>
-                  <Component id="manage" min="-2" max="-2" attributes="0"/>
-                  <Component id="statistic" min="-2" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="67" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="goalButton" alignment="3" max="32767" attributes="0"/>
+                  <Component id="learnButton" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="notifyButton" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace min="-2" pref="61" max="-2" attributes="0"/>
-              <Component id="goalButton" min="-2" pref="36" max="-2" attributes="0"/>
-              <EmptySpace min="-2" pref="60" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="78" max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
   </Layout>
   <SubComponents>
-    <Component class="java.awt.Button" name="review">
+    <Component class="java.awt.Button" name="reviewButton">
       <Properties>
         <Property name="label" type="java.lang.String" value="&#xd4;n t&#x1ead;p"/>
       </Properties>
       <Events>
-        <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="reviewMouseClicked"/>
+        <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="reviewButtonMouseClicked"/>
       </Events>
     </Component>
-    <Component class="java.awt.Button" name="button3">
+    <Component class="java.awt.Button" name="manageDIcButton">
       <Properties>
         <Property name="label" type="java.lang.String" value="Qu&#x1ea3;n l&#xfd; t&#x1eeb; &#x111;i&#x1ec3;n"/>
         <Property name="name" type="java.lang.String" value="Qu&#x1ea3;n l&#xfd; t&#x1eeb; &#x111;i&#x1ec3;n" noResource="true"/>
       </Properties>
       <Events>
-        <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="button3MouseClicked"/>
+        <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="manageDIcButtonMouseClicked"/>
       </Events>
     </Component>
-    <Component class="java.awt.Button" name="manage">
+    <Component class="java.awt.Button" name="manageWordButton">
       <Properties>
         <Property name="label" type="java.lang.String" value="Qu&#x1ea3;n l&#xfd; t&#x1eeb; v&#x1ef1;ng"/>
       </Properties>
       <Events>
-        <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="manageMouseClicked"/>
+        <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="manageWordButtonMouseClicked"/>
       </Events>
     </Component>
-    <Component class="java.awt.Button" name="test">
+    <Component class="java.awt.Button" name="testButton">
       <Properties>
         <Property name="label" type="java.lang.String" value="Ki&#x1ebf;m tra&#xa;"/>
       </Properties>
     </Component>
-    <Component class="java.awt.Button" name="statistic">
+    <Component class="java.awt.Button" name="statisticButton">
       <Properties>
         <Property name="label" type="java.lang.String" value="Th&#x1ed1;ng k&#xea;"/>
       </Properties>
+      <Events>
+        <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="statisticButtonMouseClicked"/>
+      </Events>
     </Component>
     <Component class="java.awt.Label" name="label1">
       <Properties>
@@ -126,7 +149,7 @@
         <Property name="text" type="java.lang.String" value="Learn English"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JButton" name="jButton1">
+    <Component class="javax.swing.JButton" name="createButton">
       <Properties>
         <Property name="text" type="java.lang.String" value="T&#x1ea1;o ch&#x1ee7; &#x111;&#x1ec1;"/>
         <Property name="toolTipText" type="java.lang.String" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
@@ -137,11 +160,11 @@
         <Property name="AccessibleContext.accessibleName" type="java.lang.String" value=""/>
       </AccessibilityProperties>
       <Events>
-        <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jButton1MouseClicked"/>
+        <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="createButtonMouseClicked"/>
       </Events>
       <AuxValues>
         <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new javax.swing.JButton(&quot;T&#x1ea1;o ch&#x1ee7; &#x111;&#x1ec1;&quot;)"/>
-        <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="jButton1.setLabel(&quot;T&#x1ea1;o ch&#x1ee7; &#x111;&#x1ec1;&quot;);"/>
+        <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="createButton.setLabel(&quot;T&#x1ea1;o ch&#x1ee7; &#x111;&#x1ec1;&quot;);"/>
       </AuxValues>
     </Component>
     <Component class="javax.swing.JButton" name="goalButton">
@@ -152,6 +175,19 @@
         <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="goalButtonMouseClicked"/>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="goalButtonActionPerformed"/>
       </Events>
+    </Component>
+    <Component class="javax.swing.JButton" name="learnButton">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="H&#x1ecd;c "/>
+      </Properties>
+      <Events>
+        <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="learnButtonMouseClicked"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JButton" name="notifyButton">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Th&#xf4;ng b&#xe1;o"/>
+      </Properties>
     </Component>
   </SubComponents>
 </Form>

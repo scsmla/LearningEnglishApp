@@ -20,6 +20,7 @@ import javax.swing.JOptionPane;
 import java.awt.image.BufferedImage;
 import java.util.Date;
 import java.text.*;
+import javax.swing.filechooser.FileNameExtensionFilter;
 
 /**
  *
@@ -199,7 +200,6 @@ public class AddWord extends javax.swing.JFrame {
         {
             notifyLabel.setForeground(Color.GREEN);
             notifyLabel.setText("Đã thêm từ mới");
-            String sqlquery = "SELECT * FROM Subject";
             String word = wordTextField.getText();
             String meaning = meaningTextField.getText();
             String subject = subjectComboBox.getItemAt(subjectComboBox.getSelectedIndex());
@@ -234,6 +234,7 @@ public class AddWord extends javax.swing.JFrame {
 
     private void filechooseButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_filechooseButtonMouseClicked
         JFileChooser fileChooser = new JFileChooser();
+        fileChooser.addChoosableFileFilter(new FileNameExtensionFilter("Images","png","jpg","gif","bmp"));
         int retval = fileChooser.showOpenDialog(null);
         if(retval == JFileChooser.APPROVE_OPTION)
         {

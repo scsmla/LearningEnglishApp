@@ -19,6 +19,11 @@ public class Manage extends javax.swing.JFrame {
     public Manage() {
         
         initComponents();
+        buttonGroup1.add(changeRadioButton);
+        buttonGroup1.add(deleteRadioButton);
+        buttonGroup1.add(addRadioButton);
+        buttonGroup2.add(handRadioButton);
+        buttonGroup2.add(excelRadioButton);
     }
 
     /**
@@ -30,6 +35,15 @@ public class Manage extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        buttonGroup1 = new javax.swing.ButtonGroup();
+        buttonGroup2 = new javax.swing.ButtonGroup();
+        buttonGroup3 = new javax.swing.ButtonGroup();
+        buttonGroup4 = new javax.swing.ButtonGroup();
+        buttonGroup5 = new javax.swing.ButtonGroup();
+        buttonGroup6 = new javax.swing.ButtonGroup();
+        jToggleButton1 = new javax.swing.JToggleButton();
+        buttonGroup7 = new javax.swing.ButtonGroup();
+        buttonGroup8 = new javax.swing.ButtonGroup();
         handRadioButton = new javax.swing.JRadioButton("Hand");
         excelRadioButton = new javax.swing.JRadioButton();
         jLabel1 = new javax.swing.JLabel();
@@ -39,23 +53,15 @@ public class Manage extends javax.swing.JFrame {
         deleteRadioButton = new javax.swing.JRadioButton();
         notifyLabel = new javax.swing.JLabel();
 
+        jToggleButton1.setText("jToggleButton1");
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         handRadioButton.setText("Hand");
         handRadioButton.setVisible(false);
-        handRadioButton.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                handRadioButtonMouseClicked(evt);
-            }
-        });
 
         excelRadioButton.setText("Excel");
         excelRadioButton.setVisible(false);
-        excelRadioButton.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                excelRadioButtonMouseClicked(evt);
-            }
-        });
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel1.setText("Click để hành động");
@@ -151,35 +157,6 @@ public class Manage extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void handRadioButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_handRadioButtonMouseClicked
-        excelRadioButton.setSelected(false);
-    }//GEN-LAST:event_handRadioButtonMouseClicked
-
-    private void excelRadioButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_excelRadioButtonMouseClicked
-        handRadioButton.setSelected(false);
-    }//GEN-LAST:event_excelRadioButtonMouseClicked
-
-    private void addRadioButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_addRadioButtonMouseClicked
-       excelRadioButton.setVisible(true);
-       handRadioButton.setVisible(true);
-       changeRadioButton.setSelected(false);
-       deleteRadioButton.setSelected(false);
-    }//GEN-LAST:event_addRadioButtonMouseClicked
-
-    private void changeRadioButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_changeRadioButtonMouseClicked
-       excelRadioButton.setVisible(false);
-       handRadioButton.setVisible(false);
-       deleteRadioButton.setSelected(false);
-       addRadioButton.setSelected(false);
-    }//GEN-LAST:event_changeRadioButtonMouseClicked
-
-    private void deleteRadioButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_deleteRadioButtonMouseClicked
-        excelRadioButton.setVisible(false);
-        handRadioButton.setVisible(false);
-        changeRadioButton.setSelected(false);
-        addRadioButton.setSelected(false);
-    }//GEN-LAST:event_deleteRadioButtonMouseClicked
-
     private void confirmButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_confirmButtonMouseClicked
         if(addRadioButton.isSelected())
         {
@@ -190,7 +167,8 @@ public class Manage extends javax.swing.JFrame {
             }
             else
             {
-                
+                AddWordByExcel addFromExcelFrame = new AddWordByExcel();
+                addFromExcelFrame.setVisible(true);
             }
             notifyLabel.setVisible(false);
         }
@@ -212,6 +190,21 @@ public class Manage extends javax.swing.JFrame {
             notifyLabel.setBackground(Color.red);
         }
     }//GEN-LAST:event_confirmButtonMouseClicked
+
+    private void addRadioButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_addRadioButtonMouseClicked
+        handRadioButton.setVisible(true);
+        excelRadioButton.setVisible(true);
+    }//GEN-LAST:event_addRadioButtonMouseClicked
+
+    private void changeRadioButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_changeRadioButtonMouseClicked
+        handRadioButton.setVisible(false);
+        excelRadioButton.setVisible(false);
+    }//GEN-LAST:event_changeRadioButtonMouseClicked
+
+    private void deleteRadioButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_deleteRadioButtonMouseClicked
+        handRadioButton.setVisible(false);
+        excelRadioButton.setVisible(false);
+    }//GEN-LAST:event_deleteRadioButtonMouseClicked
 
     /**
      * @param args the command line arguments
@@ -250,12 +243,21 @@ public class Manage extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JRadioButton addRadioButton;
+    private javax.swing.ButtonGroup buttonGroup1;
+    private javax.swing.ButtonGroup buttonGroup2;
+    private javax.swing.ButtonGroup buttonGroup3;
+    private javax.swing.ButtonGroup buttonGroup4;
+    private javax.swing.ButtonGroup buttonGroup5;
+    private javax.swing.ButtonGroup buttonGroup6;
+    private javax.swing.ButtonGroup buttonGroup7;
+    private javax.swing.ButtonGroup buttonGroup8;
     private javax.swing.JRadioButton changeRadioButton;
     private javax.swing.JButton confirmButton;
     private javax.swing.JRadioButton deleteRadioButton;
     private javax.swing.JRadioButton excelRadioButton;
     private javax.swing.JRadioButton handRadioButton;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JToggleButton jToggleButton1;
     private javax.swing.JLabel notifyLabel;
     // End of variables declaration//GEN-END:variables
 }

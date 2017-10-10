@@ -54,10 +54,10 @@ public class Test extends javax.swing.JFrame {
         try
         {
             Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
-            String sqlquery = "SELECT * FROM dbo.wordData";
+            String selectSql = "SELECT * FROM dbo.wordData";
             connection = DriverManager.getConnection(connectionUrl);
             statement = connection.createStatement();
-            resultSet =  statement.executeQuery(sqlquery);
+            resultSet =  statement.executeQuery(selectSql);
             while (resultSet.next())
             {
                 wordList.add(resultSet.getString(2));
@@ -240,7 +240,7 @@ public class Test extends javax.swing.JFrame {
                     "Xác nhận",
                     JOptionPane.YES_OPTION) == JOptionPane.YES_OPTION)
             {
-                System.exit(1);
+                System.exit(0);
             }
         }
         else

@@ -4,57 +4,56 @@
  * and open the template in the editor.
  */
 package appenglish;
+import javafx.application.Application;
+import javafx.scene.Scene;
+import javafx.scene.chart.LineChart;
+import javafx.scene.chart.NumberAxis;
+import javafx.scene.chart.XYChart;
+import javafx.stage.Stage;
+public class Demo extends Application{
 
-import java.io.File;
-import java.io.IOException;
-import java.util.Scanner;
- 
-import jxl.Cell;
-import jxl.Sheet;
-import jxl.Workbook;
-import jxl.read.biff.BiffException;
-import jxl.write.Formula;
-import jxl.write.Label;
-import jxl.write.WritableSheet;
-import jxl.write.WritableWorkbook;
-import jxl.write.WriteException;
-import jxl.write.biff.RowsExceededException;
-/**
- *
- * @author Bui
- */
-public class Demo {
-    public static void readExcel()
-    {
-        Workbook workbook;
-        try {
-            // create workbook to open file
-            workbook = Workbook.getWorkbook(new File("E:\\demo.xlxs"));
-            // get sheet want read
-            Sheet sheet = workbook.getSheet(0);
-            // get number row and col contain data
-            int rows = sheet.getRows();
-            int cols = sheet.getColumns();
- 
-            System.out.println("Data in file:");
-            // read data in each cell
-            for (int row = 0; row < rows; row++) {
-                for (int col = 0; col < cols; col++) {
-                    Cell cell = sheet.getCell(col, row);
-                    System.out.print(cell.getContents() + "\t");
-                }
-                System.out.println("\n");
-            }
-            // close
-            workbook.close();
-        } catch (BiffException e) {
-            System.out.println("File not found\n" + e.toString());
-        } catch (IOException e) {
-            System.out.println("File not found\n" + e.toString());
+   
+
+        @Override 
+        public void start(Stage stage) 
+        {
+            stage.setTitle("Line Chart Sample");
+            //defining the axes
+            final NumberAxis xAxis = new NumberAxis();
+            final NumberAxis yAxis = new NumberAxis();
+            xAxis.setLabel("Number of Month");
+            //creating the chart
+            final LineChart<Number,Number> lineChart = 
+                    new LineChart<Number,Number>(xAxis,yAxis);
+
+            lineChart.setTitle("Stock Monitoring, 2010");
+            //defining a series
+            XYChart.Series series = new XYChart.Series();
+            series.setName("My portfolio");
+            //populating the series with data
+            series.getData().add(new XYChart.Data(1, 23));
+            series.getData().add(new XYChart.Data(2, 14));
+            series.getData().add(new XYChart.Data(3, 15));
+            series.getData().add(new XYChart.Data(4, 24));
+            series.getData().add(new XYChart.Data(5, 34));
+            series.getData().add(new XYChart.Data(6, 36));
+            series.getData().add(new XYChart.Data(7, 22));
+            series.getData().add(new XYChart.Data(8, 45));
+            series.getData().add(new XYChart.Data(9, 43));
+            series.getData().add(new XYChart.Data(10, 17));
+            series.getData().add(new XYChart.Data(11, 29));
+            series.getData().add(new XYChart.Data(12, 25));
+
+            Scene scene  = new Scene(lineChart,800,600);
+            lineChart.getData().add(series);
+
+            stage.setScene(scene);
+            stage.show();
         }
-    }
-    public static void main(String  args[])
-    {
-        readExcel();
-    }
+        public static void main(String args[])
+        {
+            launch(args);
+        }
 }
+
+    

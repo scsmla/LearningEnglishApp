@@ -35,6 +35,7 @@ import javax.swing.JOptionPane;
 import java.awt.image.BufferedImage;
 import java.util.Date;
 import java.text.*;
+import javax.swing.filechooser.FileNameExtensionFilter;
 /**
  *
  * @author Bui
@@ -305,6 +306,7 @@ public class ChangeWord extends javax.swing.JFrame {
 
     private void chooseImageButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_chooseImageButtonMouseClicked
         JFileChooser filechooser = new JFileChooser();
+        filechooser.addChoosableFileFilter(new FileNameExtensionFilter("Images","png","jpg","gif","bmp"));
         int retval = filechooser.showOpenDialog(null);
         if(retval == JFileChooser.APPROVE_OPTION)
         {

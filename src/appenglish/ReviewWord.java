@@ -22,13 +22,13 @@ public class ReviewWord extends javax.swing.JFrame {
     public Connection connection = null;  
     public  Statement statement = null;   
     public  ResultSet resultSet = null;  
-    
     public PreparedStatement prepsInsertProduct = null; 
+    
     public static List<String> wordList = new ArrayList<String>();
     public static List<String> meaningList = new ArrayList<String>();
     public static List<String> imgList = new ArrayList<String>();
     private static String subjectToReview;
-    public static int length;
+    public static int numOfWords;
     public static int index = 0;
     public ReviewWord(String subject) 
     {
@@ -55,14 +55,14 @@ public class ReviewWord extends javax.swing.JFrame {
             }
             else
             {
-                length = resultSet.getRow();
+                
                 while (resultSet.next())
                 {
                     wordList.add(resultSet.getString(2));
                     meaningList.add(resultSet.getString(3));
                     imgList.add(resultSet.getString(8));
                 }   
-                length = wordList.size();
+                numOfWords = wordList.size();
 //                System.out.print(length);
             }
         }
@@ -76,15 +76,15 @@ public class ReviewWord extends javax.swing.JFrame {
    
     public void displaytheWord()
     {
-        if(index == length - 1)
-            nextButton.setEnabled(false);
+        if(index == numOfWords - 1)
+            nextButton.setVisible(false);
         else
-            nextButton.setEnabled(true);
+            nextButton.setVisible(true);
         if(index == 0)
-            previousButton.setEnabled(false);
+            previousButton.setVisible(false);
         else
-            previousButton.setEnabled(true);
-        if(length > 0)
+            previousButton.setVisible(true);
+        if(numOfWords > 0)
         {
             wordDisplayLabel.setText(wordList.get(index));
             meaningDisplayLabel.setText(meaningList.get(index));

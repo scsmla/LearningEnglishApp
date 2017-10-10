@@ -5,21 +5,92 @@
  */
 package appenglish;
 
-import java.awt.Image;
+import static appenglish.ReviewWord.imgList;
+import static appenglish.ReviewWord.meaningList;
+import static appenglish.ReviewWord.numOfWords;
+import static appenglish.ReviewWord.wordList;
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.WindowEvent;
+import java.awt.event.WindowListener;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.Statement;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 public class HomePage extends javax.swing.JFrame {
 
-    /**
-     * Creates new form HomePage
-     */
-    private JButton subject1 = new JButton();
+    public List<Integer> newWordEachDay = new ArrayList<Integer>();
+    public List<Integer> reviewWordEachDay = new ArrayList<Integer>();
+    
+     public String connectionUrl = "jdbc:sqlserver://localhost:1433;" +  
+     "databaseName=AppEnglish;integratedSecurity=true;"; 
+    public Connection connection = null;  
+    public  Statement statement = null;   
+    public  ResultSet resultSet = null;  
+    
+    public PreparedStatement prepsInsertProduct = null; 
+    
     public HomePage() 
     {
-        
         initComponents();
+        readProgressDb();
     }
+    public void readProgressDb()
+    {
+        DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd");
+        Date date = new Date();
+        try
+        {
+            Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+            String selectSql = "SELECT * FROM dbo.learningProgress " +
+                     "WHERE activeDate = N'" + dateFormat.format(date)+"'" ;
+            
+            connection = DriverManager.getConnection(connectionUrl);
+            statement = connection.createStatement();
+            resultSet =  statement.executeQuery(selectSql);
+            
+            if(!resultSet.isBeforeFirst())
+            {
+                try
+                {
+                    Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver"); 
+                    connection = DriverManager.getConnection(connectionUrl);  
+                    statement = connection.createStatement();
 
+                    String insertSql = "INSERT INTO dbo.learningProgress VALUES (0,0,N'" + dateFormat.format(date)+
+                            "')";
+                    
+                    prepsInsertProduct = connection.prepareStatement(  
+                    insertSql,  
+                    Statement.RETURN_GENERATED_KEYS);  
+                    prepsInsertProduct.execute();  
+                }
+                catch(Exception ex)
+                {
+                    ex.printStackTrace();
+                }    
+            }
+//            else
+//            {
+//                    newWordEachDay.add(resultSet.getInt(1));
+//                    reviewWordEachDay.add(resultSet.getInt(2));
+//            }
+        }       
+        
+        catch(Exception ex)
+        {
+            ex.printStackTrace();
+        }
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -29,55 +100,62 @@ public class HomePage extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        review = new java.awt.Button();
-        button3 = new java.awt.Button();
-        manage = new java.awt.Button();
-        test = new java.awt.Button();
-        statistic = new java.awt.Button();
+        reviewButton = new java.awt.Button();
+        manageDIcButton = new java.awt.Button();
+        manageWordButton = new java.awt.Button();
+        testButton = new java.awt.Button();
+        statisticButton = new java.awt.Button();
         label1 = new java.awt.Label();
-        jButton1 = new javax.swing.JButton("Tạo chủ đề");
+        createButton = new javax.swing.JButton("Tạo chủ đề");
         goalButton = new javax.swing.JButton();
+        learnButton = new javax.swing.JButton();
+        notifyButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setLocation(new java.awt.Point(0, 0));
         setPreferredSize(new java.awt.Dimension(500, 500));
 
-        review.setLabel("Ôn tập");
-        review.addMouseListener(new java.awt.event.MouseAdapter() {
+        reviewButton.setLabel("Ôn tập");
+        reviewButton.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                reviewMouseClicked(evt);
+                reviewButtonMouseClicked(evt);
             }
         });
 
-        button3.setLabel("Quản lý từ điển");
-        button3.setName("Quản lý từ điển"); // NOI18N
-        button3.addMouseListener(new java.awt.event.MouseAdapter() {
+        manageDIcButton.setLabel("Quản lý từ điển");
+        manageDIcButton.setName("Quản lý từ điển"); // NOI18N
+        manageDIcButton.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                button3MouseClicked(evt);
+                manageDIcButtonMouseClicked(evt);
             }
         });
 
-        manage.setLabel("Quản lý từ vựng");
-        manage.addMouseListener(new java.awt.event.MouseAdapter() {
+        manageWordButton.setLabel("Quản lý từ vựng");
+        manageWordButton.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                manageMouseClicked(evt);
+                manageWordButtonMouseClicked(evt);
             }
         });
 
-        test.setLabel("Kiếm tra\n");
+        testButton.setLabel("Kiếm tra\n");
 
-        statistic.setLabel("Thống kê");
+        statisticButton.setLabel("Thống kê");
+        statisticButton.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                statisticButtonMouseClicked(evt);
+            }
+        });
 
         label1.setAlignment(java.awt.Label.CENTER);
         label1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         label1.setText("Learn English");
 
-        jButton1.setLabel("Tạo chủ đề");
-        jButton1.setText("Tạo chủ đề");
-        jButton1.setToolTipText("");
-        jButton1.addMouseListener(new java.awt.event.MouseAdapter() {
+        createButton.setLabel("Tạo chủ đề");
+        createButton.setText("Tạo chủ đề");
+        createButton.setToolTipText("");
+        createButton.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jButton1MouseClicked(evt);
+                createButtonMouseClicked(evt);
             }
         });
 
@@ -93,6 +171,15 @@ public class HomePage extends javax.swing.JFrame {
             }
         });
 
+        learnButton.setText("Học ");
+        learnButton.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                learnButtonMouseClicked(evt);
+            }
+        });
+
+        notifyButton.setText("Thông báo");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -103,19 +190,27 @@ public class HomePage extends javax.swing.JFrame {
                 .addGap(137, 137, 137))
             .addGroup(layout.createSequentialGroup()
                 .addGap(51, 51, 51)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(manage, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(47, 47, 47)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(goalButton, javax.swing.GroupLayout.DEFAULT_SIZE, 110, Short.MAX_VALUE)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addComponent(review, javax.swing.GroupLayout.DEFAULT_SIZE, 110, Short.MAX_VALUE)
-                        .addComponent(test, javax.swing.GroupLayout.DEFAULT_SIZE, 110, Short.MAX_VALUE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 47, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(button3, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(statistic, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addComponent(createButton, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(goalButton, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(2, 2, 2)
+                        .addComponent(manageWordButton, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 34, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(reviewButton, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(43, 43, 43))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(learnButton, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(testButton, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(manageDIcButton, javax.swing.GroupLayout.DEFAULT_SIZE, 102, Short.MAX_VALUE)
+                    .addComponent(statisticButton, javax.swing.GroupLayout.DEFAULT_SIZE, 102, Short.MAX_VALUE)
+                    .addComponent(notifyButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(31, 31, 31))
         );
         layout.setVerticalGroup(
@@ -124,52 +219,113 @@ public class HomePage extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(label1, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(45, 45, 45)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(button3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(review, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 45, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(test, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(manage, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(statistic, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(61, 61, 61)
-                .addComponent(goalButton, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(60, 60, 60))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(createButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(manageDIcButton, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(reviewButton, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(65, 65, 65)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(testButton, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(manageWordButton, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(statisticButton, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(67, 67, 67)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(goalButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(learnButton)
+                    .addComponent(notifyButton))
+                .addGap(78, 78, 78))
         );
 
-        jButton1.getAccessibleContext().setAccessibleName("");
+        createButton.getAccessibleContext().setAccessibleName("");
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseClicked
+    private void createButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_createButtonMouseClicked
         Create createFrame = new Create();
         createFrame.setVisible(true);
-    }//GEN-LAST:event_jButton1MouseClicked
+    }//GEN-LAST:event_createButtonMouseClicked
 
-    private void reviewMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_reviewMouseClicked
+    private void reviewButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_reviewButtonMouseClicked
         Review reviewFrame = new Review();
         reviewFrame.setVisible(true);
-    }//GEN-LAST:event_reviewMouseClicked
+    }//GEN-LAST:event_reviewButtonMouseClicked
 
-    private void button3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_button3MouseClicked
-        // TODO add your handling code here:
-    }//GEN-LAST:event_button3MouseClicked
+    private void manageDIcButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_manageDIcButtonMouseClicked
+        ManageDictionary ManageDictionaryFrame = new ManageDictionary();
+        ManageDictionaryFrame.setVisible(true);
+    }//GEN-LAST:event_manageDIcButtonMouseClicked
 
-    private void manageMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_manageMouseClicked
+    private void manageWordButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_manageWordButtonMouseClicked
         Manage manageFrame = new Manage();
         manageFrame.setVisible(true);
-    }//GEN-LAST:event_manageMouseClicked
+    }//GEN-LAST:event_manageWordButtonMouseClicked
 
     private void goalButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_goalButtonActionPerformed
-        // TODO add your handling code here:
+        setGoal setGoalFrame = new setGoal();
+        setGoalFrame.setVisible(true);
     }//GEN-LAST:event_goalButtonActionPerformed
 
     private void goalButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_goalButtonMouseClicked
         setGoal setGoalFrame = new setGoal();
         setGoalFrame.setVisible(true);
     }//GEN-LAST:event_goalButtonMouseClicked
+
+    private void learnButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_learnButtonMouseClicked
+  
+        Learn learnFrame = new Learn();
+        learnFrame.setVisible(true);  
+        learnFrame.addWindowListener(new WindowListener() {
+            @Override
+            public void windowOpened(WindowEvent e) {
+               
+            }
+
+            @Override
+            public void windowClosing(WindowEvent e) {
+                learnFrame.windowClosing(e);
+            }
+
+            @Override
+            public void windowClosed(WindowEvent e) {
+                
+            }
+
+            @Override
+            public void windowIconified(WindowEvent e) {
+                
+            }
+
+            @Override
+            public void windowDeiconified(WindowEvent e) {
+                
+            }
+
+            @Override
+            public void windowActivated(WindowEvent e) {
+                
+            }
+            @Override
+            public void windowDeactivated(WindowEvent e) {
+                
+            }
+        });
+    }//GEN-LAST:event_learnButtonMouseClicked
+
+    private void statisticButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_statisticButtonMouseClicked
+        Statistic statistic = new Statistic();
+        String[] args = {};
+        statisticButton.setVisible(false);
+        try 
+        {
+            statistic.main(args);
+        } catch (ParseException ex) 
+        {
+            Logger.getLogger(HomePage.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_statisticButtonMouseClicked
 
     /**
      * @param args the command line arguments
@@ -192,8 +348,6 @@ public class HomePage extends javax.swing.JFrame {
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
             java.util.logging.Logger.getLogger(HomePage.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
-        //</editor-fold>
-
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
@@ -202,13 +356,15 @@ public class HomePage extends javax.swing.JFrame {
         });
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private java.awt.Button button3;
+    private javax.swing.JButton createButton;
     private javax.swing.JButton goalButton;
-    private javax.swing.JButton jButton1;
     private java.awt.Label label1;
-    private java.awt.Button manage;
-    private java.awt.Button review;
-    private java.awt.Button statistic;
-    private java.awt.Button test;
+    private javax.swing.JButton learnButton;
+    private java.awt.Button manageDIcButton;
+    private java.awt.Button manageWordButton;
+    private javax.swing.JButton notifyButton;
+    private java.awt.Button reviewButton;
+    private java.awt.Button statisticButton;
+    private java.awt.Button testButton;
     // End of variables declaration//GEN-END:variables
 }
