@@ -131,6 +131,9 @@
       <Properties>
         <Property name="label" type="java.lang.String" value="Ki&#x1ebf;m tra&#xa;"/>
       </Properties>
+      <Events>
+        <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="testButtonMouseClicked"/>
+      </Events>
     </Component>
     <Component class="java.awt.Button" name="statisticButton">
       <Properties>

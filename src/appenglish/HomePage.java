@@ -26,7 +26,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-public class HomePage extends javax.swing.JFrame {
+public class HomePage extends javax.swing.JFrame implements WindowListener{
 
     public List<Integer> newWordEachDay = new ArrayList<Integer>();
     public List<Integer> reviewWordEachDay = new ArrayList<Integer>();
@@ -138,6 +138,11 @@ public class HomePage extends javax.swing.JFrame {
         });
 
         testButton.setLabel("Kiếm tra\n");
+        testButton.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                testButtonMouseClicked(evt);
+            }
+        });
 
         statisticButton.setLabel("Thống kê");
         statisticButton.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -327,6 +332,11 @@ public class HomePage extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_statisticButtonMouseClicked
 
+    private void testButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_testButtonMouseClicked
+        Test testFrame = new Test();
+        testFrame.setVisible(true);
+    }//GEN-LAST:event_testButtonMouseClicked
+
     /**
      * @param args the command line arguments
      */
@@ -367,4 +377,40 @@ public class HomePage extends javax.swing.JFrame {
     private java.awt.Button statisticButton;
     private java.awt.Button testButton;
     // End of variables declaration//GEN-END:variables
+
+    @Override
+    public void windowOpened(WindowEvent e) 
+    {
+       System.out.println("Opened");
+    }
+
+    @Override
+    public void windowClosing(WindowEvent e) {
+       System.out.println("Closing");
+    }
+
+    @Override
+    public void windowClosed(WindowEvent e){
+    }
+   
+    @Override
+    public void windowIconified(WindowEvent e) 
+    {
+        System.out.println("windowIconified");
+    }
+
+    @Override
+    public void windowDeiconified(WindowEvent e) {
+         System.out.println("windowDeiconified");
+    }
+
+    @Override
+    public void windowActivated(WindowEvent e) {
+        System.out.println("Activated");
+    }
+
+    @Override
+    public void windowDeactivated(WindowEvent e) {
+        
+    }
 }
